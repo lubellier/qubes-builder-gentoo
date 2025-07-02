@@ -14,10 +14,10 @@ FLAVOR="${3:-gnome}"
 
 [ -z "${CACHE_DIR}" ] && CACHE_DIR="/tmp"
 
-TEMPLATE_CONTENT_DIR=${GENTOO_PLUGIN_DIR}scripts
+TEMPLATE_CONTENT_DIR=${GENTOO_PLUGIN_DIR}template_gentoo
 export INSTALLDIR TEMPLATE_CONTENT_DIR
 
-# shellcheck source=scripts/distribution.sh
+# shellcheck source=template_gentoo/distribution.sh
 . ${TEMPLATE_CONTENT_DIR}/distribution.sh
 
 if ! [ -d "${INSTALLDIR}/home/user" ]; then

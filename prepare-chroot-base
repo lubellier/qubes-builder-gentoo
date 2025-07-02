@@ -18,7 +18,7 @@ mkdir -p "${CACHE_DIR}"
 GPG_KEYRING="$(readlink -f ${CACHE_DIR}/gentoo-trustedkeys.gpg)"
 GPG_OPTS="--no-default-keyring --keyring $GPG_KEYRING"
 
-# shellcheck source=scripts/distribution.sh
+# shellcheck source=template_gentoo/distribution.sh
 . ${TEMPLATE_CONTENT_DIR}/distribution.sh
 
 if ! [ -f "${INSTALLDIR}/etc/.prepared_base" ]; then
