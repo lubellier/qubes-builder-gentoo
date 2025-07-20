@@ -1,13 +1,13 @@
 #!/bin/bash -e
 # vim: set ts=4 sw=4 sts=4 et :
 
-echo "--> Gentoo 04_install_qubes.sh"
+echo "--> Gentoo 02_install_groups.sh"
 
 if [ "0$VERBOSE" -ge 2 ] || [ "0$DEBUG" -gt 0 ]; then
     set -x
 fi
 
-# shellcheck source=template_gentoo/distribution.sh
+# shellcheck source=scripts/distribution.sh
 . ${TEMPLATE_CONTENT_DIR}/distribution.sh
 
 # Mount dev/proc/sys
@@ -16,17 +16,17 @@ prepareChroot "${INSTALL_DIR}"
 # Mount local cache as Portage binpkgs and distfiles
 mountCache "${CACHE_DIR}" "${INSTALL_DIR}"
 
-# Add Qubes Overlay
-setupQubesOverlay "${INSTALL_DIR}" "${RELEASE}"
+# Select profile
+setPortageProfile "${INSTALL_DIR}" "${TEMPLATE_FLAVOR}"
 
-# Standard Gentoo flags: updates base root image flags
+# Standard Gentoo flags
 setupBaseFlags "${INSTALL_DIR}" "${TEMPLATE_FLAVOR}"
 
-# Qubes Gentoo flags
-setupQubesFlags "${INSTALL_DIR}" "${TEMPLATE_FLAVOR}"
+# Update Portage
+updatePortage "${INSTALL_DIR}"
 
 # Ensure chroot is up to date
 updateChroot "${INSTALL_DIR}"
 
-# Qubes specific packages to install
-installQubesPackages "${INSTALL_DIR}" "${TEMPLATE_FLAVOR}"
+# Standard Gentoo packages to install
+installBasePackages "${INSTALL_DIR}" "${TEMPLATE_FLAVOR}"

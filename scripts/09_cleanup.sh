@@ -7,7 +7,7 @@ if [ "0$VERBOSE" -ge 2 ] || [ "0$DEBUG" -gt 0 ]; then
     set -x
 fi
 
-# shellcheck source=template_gentoo/distribution.sh
+# shellcheck source=scripts/distribution.sh
 . ${TEMPLATE_CONTENT_DIR}/distribution.sh
 
 echo " --> Cleaning..."
